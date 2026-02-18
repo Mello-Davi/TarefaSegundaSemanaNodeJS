@@ -8,26 +8,25 @@ datasource db {
 }
 
 model Usuario {
-  id       Int @id @default(autoincrement())
-  publicId String @unique @default(uuid(7))@map("public_id")
-  nome     String
-  email    String @unique
-  senha    String @map("password_hash")
-  foto     String? 
-  posts    Post[]
+  id           Int     @id @default(autoincrement())
+  publicId     String  @unique @default(uuid(7)) @map("public_id")
+  nome         String
+  email        String  @unique
+  passwordHash String  @map("password_hash")
+  foto         String?
+  posts        Post[]
 
   @@map("usuarios")
 }
 
-model Post{
-  id          Int @id @default(autoincrement())
-  publicId    String @unique @default(uuid(7))@map("public_id")
-  conteudo    String 
-  created_at  DateTime @default(now())@map("created_at")
+model Post {
+  id          Int      @id @default(autoincrement())
+  publicId    String   @unique @default(uuid(7)) @map("public_id")
+  conteudo    String
+  created_at  DateTime @default(now()) @map("created_at")
   uploaded_at DateTime @updatedAt @map("uploaded_at")
-  
-  usuarioId   Int @map("usuario_id")
-  usuario     Usuario @relation(fields: [usuarioId], references: [id])
+  usuarioId   Int      @map("usuario_id")
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
 
   @@map("posts")
 }
