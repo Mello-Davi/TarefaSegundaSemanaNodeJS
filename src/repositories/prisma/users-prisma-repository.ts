@@ -14,4 +14,21 @@ export class PrismaUsuariosReporistory implements UsuariosRepository {
     async findBy(where: Prisma.UsuarioWhereInput){
         return await prisma.usuario.findFirst({where})
     }
+
+    async list(){
+        return await prisma.usuario.findMany()
+    }
+
+    async delete(id: number){
+        await prisma.usuario.delete({
+            where: {id},
+        })
+    }
+
+    async update(id: number, data: Prisma.UsuarioUpdateInput){
+        return await prisma.usuario.update({
+            where: {id},
+            data,
+        })
+    }
 }
