@@ -8,7 +8,7 @@ export async function list (_request: FastifyRequest, reply: FastifyReply) {
         const listUserUseCase = makeListUseCase()
         const { users } = await listUserUseCase.execute()
     
-        return reply.status(201).send(UserPresenter.toHTTP(users))
+        return reply.status(200).send(UserPresenter.toHTTP(users))
     } catch (error){
 
         throw error
