@@ -129,11 +129,44 @@
         }
       ],
       "id": "5b1f96ef-26e9-4ab4-b34f-3d024c1a433e"
+    },
+    {
+      "name": "posts",
+      "item": [
+        {
+          "name": "Criar Post",
+          "id": "90b964b6-d3ec-4ead-98f0-db83f57986d5",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"conteudo\": \"Oi, meu nome é Davi!\",\n    \"usuarioId\": \"717705d5-535f-47f0-a2ae-4a366202d0ba\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/posts",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "f4bd4c05-2019-4705-85b5-a25cde24f784"
     }
   ],
   "variable": [
     {
-      "id": "094ac462-814e-407f-9084-be97cb7eb252",
+      "id": "119aa44a-9c83-4ee4-8ab2-ea2e9af057c5",
       "key": "baseURL",
       "value": "",
       "type": "default"

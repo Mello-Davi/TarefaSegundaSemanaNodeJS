@@ -1,13 +1,13 @@
-import type { PostCreateInput, PostUpdateInput, PostWhereInput } from "@/@types/prisma/models";
-import type { PostsRepository } from "../posts-repository";
+import type { Prisma } from "@/@types/prisma/client";
 import { prisma } from "@/libs/prisma";
+import type { PostsRepository } from "../posts-repository";
 
 export class PrismaPostsRepository implements PostsRepository {
-    async create(data: PostCreateInput){
+    async create(data: Prisma.PostUncheckedCreateInput){
         return await prisma.post.create({ data });
     }
     
-    async findBy(where: PostWhereInput) {
+    async findBy(where: Prisma.PostWhereInput) {
         return await prisma.post.findFirst({ where });
     }
     
@@ -19,7 +19,7 @@ export class PrismaPostsRepository implements PostsRepository {
         await prisma.post.delete({ where: { id }})
     }
     
-    async update(id: number, data: PostUpdateInput) {
+    async update(id: number, data: Prisma.PostUpdateInput) {
         return await prisma.post.update({
             where: {id}, 
             data

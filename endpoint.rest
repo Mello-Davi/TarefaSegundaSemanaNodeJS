@@ -1,10 +1,13 @@
 @apiUrl = http://localhost:{{$dotenv PORT}}
 @publicId=fcbc2944-941f-46ea-9a52-81d06dae06c8
 
-GET {{apiUrl}}/users/ HTTP/1.1
+POST {{apiUrl}}/posts HTTP/1.1
 Content-Type: application/json
 
-
+{
+    "conteudo": "Oi, meu nome é Davi.",
+    "usarioId": "d0cdbc45-723c-4675-906e-b7eef7ccaaa3"
+}
 
 
 

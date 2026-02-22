@@ -1,7 +1,7 @@
 import { Prisma, type Post } from "@/@types/prisma/client"
 
 export interface PostsRepository{
-    create(data: Prisma.PostCreateInput): Promise<Post>
+    create(data: Prisma.PostUncheckedCreateInput): Promise<Post>
     findBy(where: Prisma.PostWhereInput): Promise<Post | null>
     list(): Promise<Post[]>
     delete(id: number): Promise<void>
