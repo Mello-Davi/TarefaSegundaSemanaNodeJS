@@ -159,6 +159,24 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "New Request",
+          "id": "c1e40828-2cc4-4944-8486-6c793e3eb4f2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/posts",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "posts"
+              ]
+            }
+          },
+          "response": []
         }
       ],
       "id": "f4bd4c05-2019-4705-85b5-a25cde24f784"
@@ -166,7 +184,7 @@
   ],
   "variable": [
     {
-      "id": "119aa44a-9c83-4ee4-8ab2-ea2e9af057c5",
+      "id": "c0363cdd-3ce6-4ced-8e0a-aaf0de03f569",
       "key": "baseURL",
       "value": "",
       "type": "default"

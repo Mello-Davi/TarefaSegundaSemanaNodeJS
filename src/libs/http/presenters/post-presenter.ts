@@ -3,7 +3,6 @@ import type { Post } from "@/@types/prisma/client"
 type HTTPPost = {
     id: string
     conteudo: string
-    usuarioId: number
     createdAt: Date 
     uploadedAt: Date
 }
@@ -19,7 +18,6 @@ export class PostPresenter {
         return{
             id: input.publicId,
             conteudo: input.conteudo,
-            usuarioId: input.usuarioId,
             createdAt: input.created_at,
             uploadedAt: input.uploaded_at,
         }
