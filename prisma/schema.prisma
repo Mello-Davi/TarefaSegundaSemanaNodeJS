@@ -28,7 +28,7 @@ model Post {
   created_at  DateTime @default(now()) @map("created_at")
   uploaded_at DateTime @updatedAt @map("uploaded_at")
   usuarioId   Int      @map("usuario_id")
-  usuario     Usuario  @relation(fields: [usuarioId], references: [id])
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
 
   @@map("posts")
 }
