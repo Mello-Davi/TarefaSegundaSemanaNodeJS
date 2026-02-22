@@ -6,6 +6,7 @@ interface UpdateUserUseCaseRequest {
     publicId: string,
     nome?: string,
     email?: string,
+    passwordHash?: string,
     foto?: string
 }
 
@@ -19,6 +20,7 @@ export class UpdateUserUseCase {
         publicId,
         nome,
         email,
+        passwordHash,
         foto,
     }: UpdateUserUseCaseRequest): Promise<UpdateUserUseCaseResponse>{
         
@@ -31,6 +33,7 @@ export class UpdateUserUseCase {
         const user = await this.usuariosRepository.update(userToUpdate.id, {
             nome,
             email,
+            passwordHash,
             foto
         })
 

@@ -15,16 +15,18 @@ export async function update (request: FastifyRequest, reply: FastifyReply) {
         const updateBodySchema = z.object({
             nome: z.string().trim().min(1).max(100).optional(),
             email: z.email().min(1).max(100).optional(),
+            passwordHash: z.string().trim().min(8).max(100).optional(),
             foto: z.string().optional()
         })
     
-        const {nome, email, foto} = updateBodySchema.parse(request.body)
+        const {nome, email, passwordHash, foto} = updateBodySchema.parse(request.body)
    
         const updateUserUseCase = makeUpdateUseCase()
         const { user } = await updateUserUseCase.execute({
             publicId,
             nome,
             email,
+            passwordHash,
             foto,
         })
     

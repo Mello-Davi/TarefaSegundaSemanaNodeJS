@@ -1,0 +1,142 @@
+{
+  "info": {
+    "_postman_id": "f2a1ce4b-958e-4b3b-9f4c-df840b2479e8",
+    "name": "TarefaPrimeiraSemanaNODE",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "Criar Usuário",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "4df7661d-28a6-4b5e-bdf7-754d5a965541",
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "7c804aef-d246-4e14-b639-035666b7109a",
+                "exec": [
+                  "{",
+                  "    \"nome\": \"Davi Silva\",",
+                  "    \"email\": \"davi.silva@example.com\",",
+                  "    \"password\": \"12345612345\"",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "id": "481d910b-b81b-4a3d-bf99-e90c2f1183cc",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lista de Usuários",
+          "id": "d9883de7-53f5-4a1f-98cb-ddadec529f94",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Usuário Específico",
+          "id": "a31fe282-d394-431e-816d-52b44c530afe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/users/1ec86d3b-b7fd-4835-8adc-dd98b74fc95a",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "1ec86d3b-b7fd-4835-8adc-dd98b74fc95a"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Atualizar Dados do Usuário",
+          "id": "2e3fe79b-36c3-467f-a3fe-49716dd9fcc3",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Roberto Marinho\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/users/acea5a06-4eda-4b43-ba85-a730efbf6375",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "users",
+                "acea5a06-4eda-4b43-ba85-a730efbf6375"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deletar Usuário",
+          "id": "20f9d0fa-edf8-4ea4-86fb-d1c4cc000bc4",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "5b1f96ef-26e9-4ab4-b34f-3d024c1a433e"
+    }
+  ],
+  "variable": [
+    {
+      "id": "094ac462-814e-407f-9084-be97cb7eb252",
+      "key": "baseURL",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}
