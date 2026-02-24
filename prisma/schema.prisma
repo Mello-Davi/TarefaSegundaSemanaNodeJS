@@ -40,7 +40,7 @@ model Post {
 
 model Comentario {
   id          Int @id @default(autoincrement())
-  public_id   String @unique @default(uuid()) @map("public_id")
+  publicId   String @unique @default(uuid()) @map("public_id")
   conteudo    String
   created_at  DateTime @default(now()) @map("created_at")
   
@@ -57,7 +57,7 @@ model Comentario {
 
 model Like {
   id          Int @id @default(autoincrement())
-  public_id   String @unique @default(uuid()) @map("public_id")
+  publicId   String @unique @default(uuid()) @map("public_id")
   created_at  DateTime @default(now()) @map("created_at")
   
   usuarioId   Int      @map("usuario_id")
@@ -67,7 +67,7 @@ model Like {
   post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
   
   comentarioId Int @map("comentario_id")
-  comentario   Comentario @relation(fields: [comentario_id], references: [id], onDelete: Cascade)
+  comentario   Comentario @relation(fields: [comentarioId], references: [id], onDelete: Cascade)
 
   @@map("likes")
 }
