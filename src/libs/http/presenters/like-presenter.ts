@@ -10,7 +10,7 @@ export class LikePresenter {
     static toHTTP(likes: Like[]): HTTPLike[]
     static toHTTP(input: Like | Like[]): HTTPLike | HTTPLike[] {
         if(Array.isArray(input)){
-            return input.map((Like)=> this.toHTTP(Like))
+            return input.map((like)=> this.toHTTP(like))
         }
 
         return{

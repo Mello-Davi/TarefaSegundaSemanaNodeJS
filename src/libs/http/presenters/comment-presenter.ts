@@ -11,7 +11,7 @@ export class ComentarioPresenter {
     static toHTTP(comentarios: Comentario[]): HTTPComentario[]
     static toHTTP(input: Comentario | Comentario[]): HTTPComentario | HTTPComentario[] {
         if(Array.isArray(input)){
-            return input.map((Comentario)=> this.toHTTP(Comentario))
+            return input.map((comentario)=> this.toHTTP(comentario))
         }
 
         return{
