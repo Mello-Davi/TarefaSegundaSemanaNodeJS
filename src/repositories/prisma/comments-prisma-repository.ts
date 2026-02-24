@@ -2,7 +2,7 @@ import type { Prisma } from "@/@types/prisma/client";
 import { prisma } from "@/libs/prisma";
 import type { ComentariosRepository } from "../comments-repository";
 
-export class PrismaComentaiosRepository implements ComentariosRepository {
+export class PrismaComentariosRepository implements ComentariosRepository {
     async create(data: Prisma.ComentarioUncheckedCreateInput){
         return await prisma.comentario.create({ data });
     }
