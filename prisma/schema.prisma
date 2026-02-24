@@ -8,15 +8,17 @@ datasource db {
 }
 
 model Usuario {
-  id           Int     @id @default(autoincrement())
-  publicId     String  @unique @default(uuid()) @map("public_id")
-  nome         String
-  email        String  @unique
-  passwordHash String  @map("password_hash")
-  foto         String? 
-  posts        Post[]
-  created_at  DateTime @default(now()) @map("created_at")
-  uploaded_at DateTime @updatedAt @map("uploaded_at")
+  id            Int     @id @default(autoincrement())
+  publicId      String  @unique @default(uuid()) @map("public_id")
+  nome          String
+  email         String  @unique
+  passwordHash  String  @map("password_hash")
+  foto          String? 
+  posts         Post[]
+  comentarios   Comentario[]
+  likes         Like[]
+  created_at    DateTime @default(now()) @map("created_at")
+  uploaded_at   DateTime @updatedAt @map("uploaded_at")
 
   @@map("usuarios")
 }
@@ -27,8 +29,11 @@ model Post {
   conteudo    String
   created_at  DateTime @default(now()) @map("created_at")
   uploaded_at DateTime @updatedAt @map("uploaded_at")
+  
   usuarioId   Int      @map("usuario_id")
   usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  comentarios Comentario[]
+  likes       Like[]
 
   @@map("posts")
 }
@@ -38,11 +43,31 @@ model Comentario {
   public_id   String @unique @default(uuid()) @map("public_id")
   conteudo    String
   created_at  DateTime @default(now()) @map("created_at")
+  
   usuarioId   Int      @map("usuario_id")
   usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  
   postId      Int @map("post_id")
   post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
   likes       Like[]
 
   @@map("comentarios")
+}
+
+model Like {
+  id          Int @id @default(autoincrement())
+  public_id   String @unique @default(uuid()) @map("public_id")
+  created_at  DateTime @default(now()) @map("created_at")
+  
+  usuarioId   Int      @map("usuario_id")
+  usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+  
+  postId      Int @map("post_id")
+  post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  
+  comentarioId Int @map("comentario_id")
+  comentario   Comentario @relation(fields: [comentario_id], references: [id], onDelete: Cascade)
+
+  @@map("likes")
 }
