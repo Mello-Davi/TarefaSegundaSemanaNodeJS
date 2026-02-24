@@ -1,5 +1,5 @@
 import { PrismaPostsRepository } from "@/repositories/prisma/posts-prisma-repository";
-import { DeletePostUseCase } from "../posts/delete-post";
+import { DeletePostUseCase } from "../../posts/delete-post";
 
 export function makeDeletePostUseCase(){
     const postsRepository = new PrismaPostsRepository()

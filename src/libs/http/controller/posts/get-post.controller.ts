@@ -1,6 +1,6 @@
 import z  from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
-import { makeGetPostUseCase } from "@/use-cases/factories/make-get-post"
+import { makeGetPostUseCase } from "@/use-cases/factories/post/make-get-post"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 import { PostPresenter } from "../../presenters/post-presenter"
 

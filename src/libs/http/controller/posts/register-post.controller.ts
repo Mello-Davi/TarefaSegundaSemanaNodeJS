@@ -1,6 +1,6 @@
 import z from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
-import { makeRegisterPostUseCase } from "@/use-cases/factories/make-register-post-use-case"
+import { makeRegisterPostUseCase } from "@/use-cases/factories/post/make-register-post-use-case"
 import { PostPresenter } from "../../presenters/post-presenter"
 
 export async function registerPost (request: FastifyRequest, reply: FastifyReply) {

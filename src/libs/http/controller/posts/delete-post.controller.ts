@@ -1,5 +1,5 @@
 import z  from "zod"
-import { makeDeletePostUseCase } from "@/use-cases/factories/make-delete-post"
+import { makeDeletePostUseCase } from "@/use-cases/factories/post/make-delete-post"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 import type { FastifyReply, FastifyRequest } from "fastify"
 

@@ -1,6 +1,6 @@
 import z  from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
-import { makeUpdateUseCase } from "@/use-cases/factories/make-update-user"
+import { makeUpdateUseCase } from "@/use-cases/factories/user/make-update-user"
 import { UserPresenter } from "../../presenters/user-presenter"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 

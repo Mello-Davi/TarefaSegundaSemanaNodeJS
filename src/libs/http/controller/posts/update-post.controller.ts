@@ -2,7 +2,7 @@ import z  from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
 import { PostPresenter } from "../../presenters/post-presenter"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
-import { makeUpdatePostUseCase } from "@/use-cases/factories/make-update-post"
+import { makeUpdatePostUseCase } from "@/use-cases/factories/post/make-update-post"
 
 export async function updatePost (request: FastifyRequest, reply: FastifyReply) {
     try {

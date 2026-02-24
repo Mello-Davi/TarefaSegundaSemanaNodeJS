@@ -1,5 +1,5 @@
 import { PrismaPostsRepository } from "@/repositories/prisma/posts-prisma-repository"
-import { RegisterPostUseCase } from "../posts/register"
+import { RegisterPostUseCase } from "../../posts/register"
 import { PrismaUsuariosReporistory } from "@/repositories/prisma/users-prisma-repository"
 
 

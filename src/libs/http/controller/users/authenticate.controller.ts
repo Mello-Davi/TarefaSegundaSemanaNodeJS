@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error.js'
-import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate'
+import { makeAuthenticateUseCase } from '@/use-cases/factories/user/make-authenticate'
 import { UserPresenter } from '../../presenters/user-presenter'
 
 const authenticateSchema = z.object({

@@ -1,5 +1,5 @@
 import z  from "zod"
-import { makeDeleteUserUseCase } from "@/use-cases/factories/make-delete-user"
+import { makeDeleteUserUseCase } from "@/use-cases/factories/user/make-delete-user"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 import type { FastifyReply, FastifyRequest } from "fastify"
 

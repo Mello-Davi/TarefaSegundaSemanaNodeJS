@@ -1,5 +1,5 @@
 import { PrismaPostsRepository } from "@/repositories/prisma/posts-prisma-repository";
-import { UpdatePostUseCase } from "../posts/update-post";
+import { UpdatePostUseCase } from "../../posts/update-post";
 
 
 export function makeUpdatePostUseCase(){
