@@ -3,6 +3,7 @@ import { registerComment } from "./register-comment.controller";
 import { listComments } from "./list-comment.controller";
 import { getComment } from "./get-comment.controller";
 import { updateComment } from "./update-comment.controller";
+import { deleteComment } from "./delete-comment.controller";
 
 
 export async function commentsRoutes(app: FastifyInstance) {
@@ -10,4 +11,5 @@ export async function commentsRoutes(app: FastifyInstance) {
     app.get('/', listComments)
     app.get('/:publicId', getComment)
     app.patch('/:publicId', updateComment)
+    app.delete('/:publicId', deleteComment)
 }
