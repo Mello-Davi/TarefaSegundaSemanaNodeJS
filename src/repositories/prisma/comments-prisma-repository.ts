@@ -1,0 +1,28 @@
+import type { Prisma } from "@/@types/prisma/client";
+import { prisma } from "@/libs/prisma";
+import type { ComentariosRepository } from "../comments-repository";
+
+export class PrismaComentaiosRepository implements ComentariosRepository {
+    async create(data: Prisma.ComentarioUncheckedCreateInput){
+        return await prisma.comentario.create({ data });
+    }
+    
+    async findBy(where: Prisma.ComentarioWhereInput) {
+        return await prisma.comentario.findFirst({ where });
+    }
+    
+    async list() {
+        return await prisma.comentario.findMany();
+    }
+    
+    async delete(id: number) {
+        await prisma.comentario.delete({ where: { id }})
+    }
+    
+    async update(id: number, data: Prisma.ComentarioUpdateInput) {
+        return await prisma.comentario.update({
+            where: {id}, 
+            data
+        })
+    }
+}
