@@ -57,17 +57,17 @@ model Comentario {
 
 model Like {
   id          Int @id @default(autoincrement())
-  publicId   String @unique @default(uuid()) @map("public_id")
+  publicId    String @unique @default(uuid()) @map("public_id")
   created_at  DateTime @default(now()) @map("created_at")
   
   usuarioId   Int      @map("usuario_id")
   usuario     Usuario  @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   
-  postId      Int @map("post_id")
-  post        Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId      Int? @map("post_id")
+  post        Post? @relation(fields: [postId], references: [id], onDelete: Cascade)
   
-  comentarioId Int @map("comentario_id")
-  comentario   Comentario @relation(fields: [comentarioId], references: [id], onDelete: Cascade)
+  comentarioId Int? @map("comentario_id")
+  comentario   Comentario? @relation(fields: [comentarioId], references: [id], onDelete: Cascade)
 
   @@map("likes")
 }
