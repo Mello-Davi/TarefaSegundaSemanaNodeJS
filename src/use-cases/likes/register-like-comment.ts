@@ -1,36 +1,36 @@
 import type { Like } from "@/@types/prisma/client";
 import type { UsuariosRepository } from "@/repositories/users-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { PostsRepository } from "@/repositories/posts-repository";
 import type { LikesRepository } from "@/repositories/likes-repository";
+import type { ComentariosRepository } from "@/repositories/comments-repository";
 
-interface RegisterLikePostUseCaseRequest {
+interface RegisterLikeCommentUseCaseRequest {
     usuarioId: string
-    postId: string
+    comentarioId: string
 
 }
 
-type RegisterLikePostUseCaseResponse = {
+type RegisterLikeCommentUseCaseResponse = {
     like: Like
 }
 
-export class RegisterLikePostUseCase {
+export class RegisterLikeCommentUseCase {
     constructor (
         private likesRepository: LikesRepository, 
         private usuariosRepository: UsuariosRepository,
-        private postsRepository: PostsRepository,
+        private comentariosRepository: ComentariosRepository
     ){}
     
     async execute ({
         usuarioId,
-        postId,
-    }: RegisterLikePostUseCaseRequest): Promise<RegisterLikePostUseCaseResponse>{
+        comentarioId,
+    }: RegisterLikeCommentUseCaseRequest): Promise<RegisterLikeCommentUseCaseResponse>{
     
         const user = await this.usuariosRepository.findBy({publicId: usuarioId})
         if (!user){
             throw new ResourceNotFoundError
         }
-        const post = await this.postsRepository.findBy({publicId: postId})
+        const post = await this.comentariosRepository.findBy({publicId: comentarioId})
         if (!post){
             throw new ResourceNotFoundError
         }
