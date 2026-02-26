@@ -13,7 +13,22 @@ export class PrismaLikesRepository implements LikesRepository {
             comentario: true,
         } });
     }
-    
+    async findByUserId(usuarioPublicId: string, postId?: number, comentarioId?: number) {
+        return await prisma.like.findFirst({
+            where: {
+                usuario: {
+                    publicId: usuarioPublicId,
+                },
+                ...(postId ? { postId } : {}),
+                ...(comentarioId ? { comentarioId } : {}),
+            },
+            include: {
+                usuario: true,
+                post: true,
+                comentario: true,
+            },
+        });
+    }
     async findBy(where: Prisma.LikeWhereInput) {
         return await prisma.like.findFirst({ 
             where,
