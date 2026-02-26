@@ -3,14 +3,13 @@ import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 import type { PostsRepository } from "@/repositories/posts-repository";
 import type { LikesRepository } from "@/repositories/likes-repository";
 import type { LikeWithRelations } from "@/repositories/likes-repository";
-import { LikeAlreadyExistsError } from "../errors/like-already-existis-error";
+import { UserLikeAlreadyExistsError } from "../errors/like-already-existis-error";
 
 interface RegisterLikePostUseCaseRequest {
     usuarioId: string
     postId: string
 
 }
-  
   type RegisterLikePostUseCaseResponse = {
     like: LikeWithRelations
   }
@@ -26,23 +25,25 @@ export class RegisterLikePostUseCase {
         usuarioId,
         postId,
     }: RegisterLikePostUseCaseRequest): Promise<RegisterLikePostUseCaseResponse>{
-
-        const likeExisting = await this.likesRepository.findByUserId(usuarioId)
-    
-        if(likeExisting){
-            throw new LikeAlreadyExistsError()
-        }
-
-    
         const user = await this.usuariosRepository.findBy({publicId: usuarioId})
         if (!user){
             throw new ResourceNotFoundError
         }
+
         const post = await this.postsRepository.findBy({publicId: postId})
         if (!post){
             throw new ResourceNotFoundError
         }
         
+        const likeExisting = await this.likesRepository.findByUserId(
+            usuarioId, 
+            post.id
+        )
+
+        if(likeExisting){
+            throw new UserLikeAlreadyExistsError()
+        }
+
         const like = await this.likesRepository.create({
             usuarioId: user.id,
             postId: post.id,

@@ -2,7 +2,7 @@ import z from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
 import { makeRegisterLikePostUseCase } from "@/use-cases/factories/like/make-register-like-post-use-case"
 import { LikePresenter } from "../../presenters/like-presenter"
-import { LikeAlreadyExistsError } from "@/use-cases/errors/like-already-existis-error"
+import  {UserLikeAlreadyExistsError } from "@/use-cases/errors/like-already-existis-error"
 
 
 export async function registerLikePost (request: FastifyRequest, reply: FastifyReply) {
@@ -22,7 +22,7 @@ export async function registerLikePost (request: FastifyRequest, reply: FastifyR
     
         return reply.status(201).send(LikePresenter.toHTTP(like))
     } catch (error){
-        if(error instanceof LikeAlreadyExistsError){
+        if(error instanceof UserLikeAlreadyExistsError){
             return reply.status(409).send({
                 message: error.message
             })
