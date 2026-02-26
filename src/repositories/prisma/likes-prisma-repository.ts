@@ -5,15 +5,33 @@ import type { LikesRepository } from "../likes-repository";
 
 export class PrismaLikesRepository implements LikesRepository {
     async create(data: Prisma.LikeUncheckedCreateInput){
-        return await prisma.like.create({ data });
+        return await prisma.like.create({ 
+            data,
+        include: {
+            usuario: true,
+            post: true,
+            comentario: true,
+        } });
     }
     
     async findBy(where: Prisma.LikeWhereInput) {
-        return await prisma.like.findFirst({ where });
+        return await prisma.like.findFirst({ 
+            where,
+        include: {
+            usuario: true,
+            post: true,
+            comentario: true,
+        }});
     }
     
     async list() {
-        return await prisma.like.findMany();
+        return await prisma.like.findMany({
+            include: {
+                usuario: true,
+                post: true,
+                comentario: true
+            }
+        });
     }
     
     async delete(id: number) {

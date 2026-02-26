@@ -1,13 +1,12 @@
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { Like } from "@/@types/prisma/client";
-import type { LikesRepository } from "@/repositories/likes-repository";
+import type { LikeWithRelations, LikesRepository } from "@/repositories/likes-repository";
 
 interface GetLikeUseCaseRequest {
     publicId: string
 }
 
 type GetLikeUseCaseResponse = {
-    like: Like
+    like: LikeWithRelations
 }
 
 export class GetLikeUseCase {
@@ -15,6 +14,7 @@ export class GetLikeUseCase {
     
     async execute ({
         publicId
+
     }: GetLikeUseCaseRequest): Promise<GetLikeUseCaseResponse>{
         
         const like = await this.likesRepository.findBy({publicId})

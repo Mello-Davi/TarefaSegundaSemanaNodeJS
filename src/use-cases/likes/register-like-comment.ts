@@ -1,7 +1,6 @@
-import type { Like } from "@/@types/prisma/client";
 import type { UsuariosRepository } from "@/repositories/users-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { LikesRepository } from "@/repositories/likes-repository";
+import type { LikeWithRelations, LikesRepository } from "@/repositories/likes-repository";
 import type { ComentariosRepository } from "@/repositories/comments-repository";
 
 interface RegisterLikeCommentUseCaseRequest {
@@ -11,7 +10,7 @@ interface RegisterLikeCommentUseCaseRequest {
 }
 
 type RegisterLikeCommentUseCaseResponse = {
-    like: Like
+    like: LikeWithRelations
 }
 
 export class RegisterLikeCommentUseCase {
