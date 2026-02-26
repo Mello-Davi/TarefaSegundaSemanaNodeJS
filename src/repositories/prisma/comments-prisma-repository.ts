@@ -25,4 +25,28 @@ export class PrismaComentariosRepository implements ComentariosRepository {
             data
         })
     }
+    async findComentariosByUser(usuarioPublicId: string){
+        return await prisma.comentario.findMany({
+            where: {
+                usuario: {
+                    publicId: usuarioPublicId,
+                },
+            },
+            include: {
+                usuario: true,
+                post: true,
+            },
+        });
+    }
+    async findComentariosByPost(postId: number) {
+        return await prisma.comentario.findMany({
+            where: {
+                postId,
+            },
+            include: {
+                usuario: true,
+                post: true,
+            },
+        });
+    }
 }
