@@ -25,4 +25,16 @@ export class PrismaPostsRepository implements PostsRepository {
             data
         })
     }
+    async findPostsByUser(usuarioPublicId: string){
+        return await prisma.post.findMany({
+            where: {
+                usuario: {
+                    publicId: usuarioPublicId,
+                },
+            },
+            include: {
+                usuario: true,
+            },
+        });
+    }
 }
