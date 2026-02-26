@@ -14,4 +14,8 @@ export interface LikesRepository{
     findBy(where: Prisma.LikeWhereInput): Promise<LikeWithRelations | null>
     list(): Promise<LikeWithRelations[]>
     delete(id: number): Promise<void>
+
+    findLikesByUser(usuarioId: string): Promise<LikeWithRelations[] | null>
+    findLikesByPost(postId: number): Promise<LikeWithRelations[] | null>
+    findLikesByComentario(comentarioId: number): Promise<LikeWithRelations[] | null>
 }

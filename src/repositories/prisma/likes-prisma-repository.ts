@@ -52,4 +52,44 @@ export class PrismaLikesRepository implements LikesRepository {
     async delete(id: number) {
         await prisma.like.delete({ where: { id }})
     }
+
+    async findLikesByUser(usuarioPublicId: string){
+        return await prisma.like.findMany({
+            where: {
+                usuario: {
+                    publicId: usuarioPublicId,
+                },
+            },
+            include: {
+                usuario: true,
+                post: true,
+                comentario: true,
+            },
+        });
+    }
+    async findLikesByPost(postId: number) {
+        return await prisma.like.findMany({
+            where: {
+                postId,
+            },
+            include: {
+                usuario: true,
+                post: true,
+                comentario: true,
+            },
+        });
+    }
+    async findLikesByComentario(comentarioId: number){
+        return await prisma.like.findMany({
+            where: {
+                comentarioId,
+            },
+            include: {
+                usuario: true,
+                post: true,
+                comentario: true,
+            },
+        });
+    }
+
 }
