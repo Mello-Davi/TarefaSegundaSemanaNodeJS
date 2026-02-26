@@ -5,6 +5,7 @@ import { getPost } from "./get-post.controller";
 import { updatePost } from "./update-post.controller";
 import { deletePost } from "./delete-post.controller";
 import { registerLikePost } from "../likes/register-like-post.controller";
+import { listLikesByPost } from "../likes/list-likes-by-post.controller";
 
 export async function postsRoutes(app: FastifyInstance) {
     app.post('/', registerPost)
@@ -14,4 +15,5 @@ export async function postsRoutes(app: FastifyInstance) {
     app.delete('/:publicId', deletePost)
 
     app.post('/:postId/likes', registerLikePost)
+    app.get('/:postId/likes', listLikesByPost)
 }
