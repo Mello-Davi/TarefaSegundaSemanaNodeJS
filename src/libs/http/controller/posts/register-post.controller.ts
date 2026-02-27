@@ -7,15 +7,15 @@ export async function registerPost (request: FastifyRequest, reply: FastifyReply
     try {
         const registerPostBodySchema = z.object({
             conteudo: z.string().min(1).max(1000),
-            usuarioId: z.string()
         })
     
-        const {conteudo, usuarioId} = registerPostBodySchema.parse(request.body)
+        const { conteudo } = registerPostBodySchema.parse(request.body)
+        const { sub } = request.user
    
         const registerPostUseCase = makeRegisterPostUseCase()
         const { post } = await registerPostUseCase.execute({
             conteudo,
-            usuarioId,
+            usuarioPublicId: sub,
         })
     
         return reply.status(201).send(PostPresenter.toHTTP(post))

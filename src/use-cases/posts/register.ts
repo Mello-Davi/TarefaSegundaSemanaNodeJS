@@ -5,7 +5,7 @@ import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface RegisterPostUseCaseRequest {
     conteudo: string
-    usuarioId: string
+    usuarioPublicId: string
 }
 
 type RegisterPostUseCaseResponse = {
@@ -19,10 +19,10 @@ export class RegisterPostUseCase {
     
     async execute ({
         conteudo,
-        usuarioId
+        usuarioPublicId
     }: RegisterPostUseCaseRequest): Promise<RegisterPostUseCaseResponse>{
     
-        const user = await this.usuariosRepository.findBy({publicId: usuarioId})
+        const user = await this.usuariosRepository.findBy({publicId: usuarioPublicId})
         if (!user){
             throw new ResourceNotFoundError
         }

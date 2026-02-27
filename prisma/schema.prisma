@@ -7,12 +7,19 @@ datasource db {
   provider = "postgresql"
 }
 
+enum USER_ROLE {
+  ADMIN
+  DEFAULT
+}
+
 model Usuario {
   id            Int     @id @default(autoincrement())
   publicId      String  @unique @default(uuid()) @map("public_id")
   nome          String
   email         String  @unique
   passwordHash  String  @map("password_hash")
+  role          USER_ROLE @default(DEFAULT)
+
   foto          String? 
   posts         Post[]
   comentarios   Comentario[]
