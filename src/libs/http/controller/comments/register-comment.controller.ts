@@ -8,16 +8,16 @@ export async function registerComment (request: FastifyRequest, reply: FastifyRe
     try {
         const registerCommentBodySchema = z.object({
             conteudo: z.string().min(1).max(1000),
-            usuarioId: z.string(),
             postId: z.string()
         })
     
-        const {conteudo, usuarioId, postId} = registerCommentBodySchema.parse(request.body)
+        const {conteudo, postId} = registerCommentBodySchema.parse(request.body)
+        const { sub } = request.user
    
         const registerCommentUseCase = makeRegisterCommentUseCase()
         const { comment } = await registerCommentUseCase.execute({
             conteudo,
-            usuarioId,
+            usuarioId: sub,
             postId
         })
     

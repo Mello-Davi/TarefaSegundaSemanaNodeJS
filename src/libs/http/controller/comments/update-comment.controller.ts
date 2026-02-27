@@ -12,6 +12,7 @@ export async function updateComment (request: FastifyRequest, reply: FastifyRepl
         })
     
         const { publicId } = updateParamsSchema.parse(request.params)
+        const { sub } = request.user
 
         const updateBodySchema = z.object({
             conteudo: z.string().min(1).max(1000).optional(),
@@ -21,6 +22,7 @@ export async function updateComment (request: FastifyRequest, reply: FastifyRepl
    
         const updateCommentUseCase = makeUpdateCommentUseCase()
         const { comment } = await updateCommentUseCase.execute({
+            usuarioId: sub,
             publicId,
             conteudo
         })
