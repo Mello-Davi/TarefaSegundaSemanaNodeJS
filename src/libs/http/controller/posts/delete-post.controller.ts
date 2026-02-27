@@ -11,7 +11,6 @@ export async function deletePost (request: FastifyRequest, reply: FastifyReply) 
         })
     
         const { publicId } = deletePostParamsSchema.parse(request.params)
-   
         const deletePostUseCase = makeDeletePostUseCase()
         await deletePostUseCase.execute({
             publicId

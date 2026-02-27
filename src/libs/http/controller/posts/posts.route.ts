@@ -15,7 +15,7 @@ export async function postsRoutes(app: FastifyInstance) {
     app.get('/', listPosts)
     app.get('/:publicId', getPost)
     app.patch('/:publicId', updatePost)
-    app.delete('/:publicId', deletePost)
+    app.delete('/:publicId',{onRequest: [verifyJwt, verifyUserRole(['DEFAULT'])]}, deletePost)
 
     app.post('/:postId/likes', registerLikePost)
     app.get('/:postId/likes', listLikesByPost)
