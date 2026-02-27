@@ -1,4 +1,3 @@
-import z from "zod"
 import type { FastifyReply, FastifyRequest } from "fastify"
 import { makeRegisterLikePostUseCase } from "@/use-cases/factories/like/make-register-like-post-use-case"
 import { LikePresenter } from "../../presenters/like-presenter"
@@ -7,16 +6,14 @@ import  {UserLikeAlreadyExistsError } from "@/use-cases/errors/like-already-exis
 
 export async function registerLikePost (request: FastifyRequest, reply: FastifyReply) {
     try {
-        const registerLikeBodySchema = z.object({
-            usuarioId: z.string(),
-        })
-    
-        const { usuarioId } = registerLikeBodySchema.parse(request.body)
+        const { sub } = request.user
+        console.log(request.user)
+        
         const { postId } = request.params as { postId: string }
         
         const registerLikeUseCase = makeRegisterLikePostUseCase()
         const { like } = await registerLikeUseCase.execute({
-            usuarioId,
+            usuarioPublicId: sub,
             postId
         })
     

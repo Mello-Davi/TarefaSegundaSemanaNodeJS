@@ -5,7 +5,7 @@ import type { ComentariosRepository } from "@/repositories/comments-repository";
 import { UserLikeAlreadyExistsError } from "../errors/like-already-existis-error";
 
 interface RegisterLikeCommentUseCaseRequest {
-    usuarioId: string
+    usuarioPublicId: string
     comentarioId: string
 
 }
@@ -22,11 +22,11 @@ export class RegisterLikeCommentUseCase {
     ){}
     
     async execute ({
-        usuarioId,
+        usuarioPublicId,
         comentarioId,
     }: RegisterLikeCommentUseCaseRequest): Promise<RegisterLikeCommentUseCaseResponse>{
 
-        const user = await this.usuariosRepository.findBy({publicId: usuarioId})
+        const user = await this.usuariosRepository.findBy({publicId: usuarioPublicId})
         if (!user){
             throw new ResourceNotFoundError()
         }
@@ -37,7 +37,7 @@ export class RegisterLikeCommentUseCase {
         }
 
         const likeExisting = await this.likesRepository.findByUserId(
-            usuarioId,
+            usuarioPublicId,
             undefined,
             comentario.id
         )

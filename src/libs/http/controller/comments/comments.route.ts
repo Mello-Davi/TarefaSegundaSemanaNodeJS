@@ -6,7 +6,8 @@ import { updateComment } from "./update-comment.controller";
 import { deleteComment } from "./delete-comment.controller";
 import { registerLikeComment } from "../likes/register-like-comment.controller";
 import { listLikesByComentario } from "../likes/list-like-by-comment.controller";
-
+import { verifyJwt } from "../../middlewares/verify-jwt";
+import { verifyUserRole } from "../../middlewares/verify-user-role";
 
 export async function commentsRoutes(app: FastifyInstance) {
     app.post('/', registerComment)
@@ -15,6 +16,6 @@ export async function commentsRoutes(app: FastifyInstance) {
     app.patch('/:publicId', updateComment)
     app.delete('/:publicId', deleteComment)
 
-    app.post('/:comentarioId/likes', registerLikeComment)
+    app.post('/:comentarioId/likes',{onRequest: [verifyJwt, verifyUserRole(['DEFAULT'])]}, registerLikeComment)
     app.get('/:comentarioId/likes', listLikesByComentario)
 }

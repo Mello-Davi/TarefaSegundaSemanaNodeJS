@@ -17,7 +17,8 @@ export async function postsRoutes(app: FastifyInstance) {
     app.patch('/:publicId', updatePost)
     app.delete('/:publicId',{onRequest: [verifyJwt, verifyUserRole(['DEFAULT', 'ADMIN'])]}, deletePost)
 
-    app.post('/:postId/likes', registerLikePost)
+    app.post('/:postId/likes',{onRequest: [verifyJwt, verifyUserRole(['DEFAULT'])]}, registerLikePost)
+    
     app.get('/:postId/likes', listLikesByPost)
     app.get('/:postId/comments', listComentariosByPost)
 }

@@ -19,8 +19,8 @@ export class PrismaLikesRepository implements LikesRepository {
                 usuario: {
                     publicId: usuarioPublicId,
                 },
-                ...(postId ? { postId } : {}),
-                ...(comentarioId ? { comentarioId } : {}),
+                ...(postId !== undefined ? { postId } : {}),
+                ...(comentarioId !== undefined ? { comentarioId } : {}),
             },
             include: {
                 usuario: true,
