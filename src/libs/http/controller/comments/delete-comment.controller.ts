@@ -11,10 +11,12 @@ export async function deleteComment (request: FastifyRequest, reply: FastifyRepl
         })
     
         const { publicId } = deleteCommentParamsSchema.parse(request.params)
-   
+        const { sub } = request.user
+
         const deleteCommentUseCase = makeDeleteCommentUseCase()
         await deleteCommentUseCase.execute({
-            publicId
+            publicId,
+            usuarioId: sub
         })
         return reply.status(200).send()
     } catch (error){
