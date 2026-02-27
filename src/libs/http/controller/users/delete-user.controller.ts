@@ -1,4 +1,3 @@
-import z  from "zod"
 import { makeDeleteUserUseCase } from "@/use-cases/factories/user/make-delete-user"
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 import type { FastifyReply, FastifyRequest } from "fastify"
@@ -6,16 +5,12 @@ import type { FastifyReply, FastifyRequest } from "fastify"
 
 export async function deleteUser (request: FastifyRequest, reply: FastifyReply) {
     try {
-        const deleteUserParamsSchema = z.object({
-            publicId: z.string()
-        })
-    
-        const { publicId } = deleteUserParamsSchema.parse(request.params)
-   
+        const { sub } = request.user as { sub: string }
+
         const deleteUserUseCase = makeDeleteUserUseCase()
       
         await deleteUserUseCase.execute({
-            publicId
+            publicId: sub
         })
 
 

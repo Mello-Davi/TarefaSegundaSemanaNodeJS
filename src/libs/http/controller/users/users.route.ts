@@ -8,6 +8,8 @@ import { authenticate } from "./authenticate.controller.js"
 import { listLikesByUser } from "../likes/list-likes-by-user.controller.js"
 import { listPostsByUser } from "../posts/list-posts-by-user.controller.js"
 import { listComentariosByUser } from "../comments/list-comments-by-user.controller.js"
+import { verifyJwt } from "../../middlewares/verify-jwt";
+import { verifyUserRole } from "../../middlewares/verify-user-role";
 
 export async function usersRoutes (app: FastifyInstance){
     app.post('/', register)
@@ -15,7 +17,7 @@ export async function usersRoutes (app: FastifyInstance){
 
     app.get('/:publicId', get)
     app.get('/', list)
-    app.delete('/:publicId', deleteUser)
+    app.delete('/',{onRequest: [verifyJwt, verifyUserRole(['DEFAULT', 'ADMIN'])]}, deleteUser)
     app.patch('/:publicId', update)
 
     app.get('/:usuarioId/likes', listLikesByUser)
