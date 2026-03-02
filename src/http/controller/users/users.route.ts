@@ -1,9 +1,9 @@
 import type { FastifyInstance } from "fastify"
 import { register } from "./register.controller.js"
-import { get } from "./get-user.controller.js"
+import { get, getProfile } from "./get-user.controller.js"
 import { list } from "./list.controller.js"
 import { deleteUser } from "./delete-user.controller.js"
-import { update } from "./update-user.controller.js"
+import { update, updateProfile } from "./update-user.controller.js"
 import { authenticate } from "./authenticate.controller.js"
 import { listLikesByUser } from "../likes/list-likes-by-user.controller.js"
 import { listPostsByUser } from "../posts/list-posts-by-user.controller.js"
@@ -23,4 +23,7 @@ export async function usersRoutes (app: FastifyInstance){
     app.get('/:usuarioId/likes', listLikesByUser)
     app.get('/:usuarioId/posts', listPostsByUser)
     app.get('/:usuarioId/comments', listComentariosByUser)
+
+    app.get('/me', { onRequest: [verifyJwt]}, getProfile)
+    app.patch('/me', {onRequest: [verifyJwt]}, updateProfile)
 }
