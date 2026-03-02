@@ -8,20 +8,23 @@ export async function updatePost (request: FastifyRequest, reply: FastifyReply) 
     try {
         const updateParamsSchema = z.object({
             publicId: z.string(),
+            titulo: z.string().optional(),
             conteudo: z.string().optional()
         })
     
         const { publicId } = updateParamsSchema.parse(request.params)
 
         const updateBodySchema = z.object({
+            titulo: z.string().min(1).max(1000).optional(),
             conteudo: z.string().min(1).max(1000).optional(),
         })
     
-        const {conteudo} = updateBodySchema.parse(request.body)
+        const {titulo, conteudo} = updateBodySchema.parse(request.body)
    
         const updatePostUseCase = makeUpdatePostUseCase()
         const { post } = await updatePostUseCase.execute({
             publicId,
+            titulo,
             conteudo
         })
     

@@ -6,14 +6,16 @@ import { PostPresenter } from "../../presenters/post-presenter"
 export async function registerPost (request: FastifyRequest, reply: FastifyReply) {
     try {
         const registerPostBodySchema = z.object({
+            titulo: z.string().min(1).max(20),
             conteudo: z.string().min(1).max(1000),
         })
     
-        const { conteudo } = registerPostBodySchema.parse(request.body)
+        const { titulo, conteudo } = registerPostBodySchema.parse(request.body)
         const { sub } = request.user
    
         const registerPostUseCase = makeRegisterPostUseCase()
         const { post } = await registerPostUseCase.execute({
+            titulo,
             conteudo,
             usuarioPublicId: sub,
         })

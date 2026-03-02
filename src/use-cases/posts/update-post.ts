@@ -4,6 +4,7 @@ import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface UpdatePostUseCaseRequest {
     publicId: string,
+    titulo?: string,
     conteudo?: string
 }
 
@@ -15,6 +16,7 @@ export class UpdatePostUseCase {
     constructor (private PostsRepository: PostsRepository){}
     async execute ({
         publicId,
+        titulo,
         conteudo
     }: UpdatePostUseCaseRequest): Promise<UpdatePostUseCaseResponse>{
         
@@ -25,6 +27,7 @@ export class UpdatePostUseCase {
         }
 
         const post = await this.PostsRepository.update(postToUpdate.id, {
+            titulo,
             conteudo
         })
 

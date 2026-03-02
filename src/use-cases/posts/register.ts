@@ -4,6 +4,7 @@ import type { UsuariosRepository } from "@/repositories/users-repository";
 import { ResourceNotFoundError } from "../errors/resource-not-found-error";
 
 interface RegisterPostUseCaseRequest {
+    titulo: string
     conteudo: string
     usuarioPublicId: string
 }
@@ -18,6 +19,7 @@ export class RegisterPostUseCase {
     ){}
     
     async execute ({
+        titulo,
         conteudo,
         usuarioPublicId
     }: RegisterPostUseCaseRequest): Promise<RegisterPostUseCaseResponse>{
@@ -27,6 +29,7 @@ export class RegisterPostUseCase {
             throw new ResourceNotFoundError
         }
         const post = await this.postsRepository.create({
+            titulo,
             conteudo,
             usuarioId: user.id
         })
