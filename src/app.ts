@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import { appRoutes } from './libs/http/controller/routes.js'
+import { appRoutes } from './http/controller/routes.js'
 import { ZodError } from 'zod'
 import fastifyJwt from '@fastify/jwt'
 import { env } from 'process'

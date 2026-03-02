@@ -8,8 +8,8 @@ import { authenticate } from "./authenticate.controller.js"
 import { listLikesByUser } from "../likes/list-likes-by-user.controller.js"
 import { listPostsByUser } from "../posts/list-posts-by-user.controller.js"
 import { listComentariosByUser } from "../comments/list-comments-by-user.controller.js"
-import { verifyJwt } from "../../middlewares/verify-jwt";
-import { verifyUserRole } from "../../middlewares/verify-user-role";
+import { verifyJwt } from "../../middlewares/verify-jwt.js";
+import { verifyUserRole } from "../../middlewares/verify-user-role.js";
 
 export async function usersRoutes (app: FastifyInstance){
     app.post('/', register)
