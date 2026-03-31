@@ -3,7 +3,7 @@ import { makeDeleteCommentUseCase } from "@/use-cases/factories/comment/make-del
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error"
 import type { FastifyReply, FastifyRequest } from "fastify"
 
-//pequana mudança para fazer o commit 
+//pequana mudança para fazer o commit (2)
 export async function deleteComment (request: FastifyRequest, reply: FastifyReply) {
     try {
         const deleteCommentParamsSchema = z.object({
