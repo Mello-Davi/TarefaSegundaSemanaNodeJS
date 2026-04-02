@@ -1,9 +1,9 @@
-import { PrismaUsuariosReporistory } from "@/repositories/prisma/users-prisma-repository";
-import { GetUserUseCase } from "../../users/get-users";
+import { PrismaUsuariosReporistory } from '@/repositories/prisma/users-prisma-repository'
+import { GetUserUseCase } from '../../users/get-users'
 
-export function makeGetUseCase(){
-    const usuariosRepository = new PrismaUsuariosReporistory()
-    const getUserUseCase = new GetUserUseCase(usuariosRepository)
+export function makeGetUseCase() {
+  const usuariosRepository = new PrismaUsuariosReporistory()
+  const getUserUseCase = new GetUserUseCase(usuariosRepository)
 
-    return getUserUseCase
+  return getUserUseCase
 }

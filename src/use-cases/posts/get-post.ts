@@ -1,28 +1,26 @@
-
-import type { PostsRepository } from "@/repositories/posts-repository";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { Post } from "@/@types/prisma/client";
+import type { Post } from '@/@types/prisma/client'
+import type { PostsRepository } from '@/repositories/posts-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface GetPostUseCaseRequest {
-    publicId: string
+  publicId: string
 }
 
 type GetPostUseCaseResponse = {
-    post: Post
+  post: Post
 }
 
 export class GetPostUseCase {
-    constructor (private postsRepository: PostsRepository){}
-    
-    async execute ({
-        publicId
-    }: GetPostUseCaseRequest): Promise<GetPostUseCaseResponse>{
-        
-        const post = await this.postsRepository.findBy({publicId})
+  constructor(private postsRepository: PostsRepository) {}
 
-        if (!post){
-            throw new ResourceNotFoundError()
-        }
-        return {post}
+  async execute({
+    publicId,
+  }: GetPostUseCaseRequest): Promise<GetPostUseCaseResponse> {
+    const post = await this.postsRepository.findBy({ publicId })
+
+    if (!post) {
+      throw new ResourceNotFoundError()
     }
+    return { post }
+  }
 }

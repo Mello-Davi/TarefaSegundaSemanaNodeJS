@@ -1,9 +1,9 @@
-import { GetLikeUseCase } from "@/use-cases/likes/get-like";
-import { PrismaLikesRepository } from "@/repositories/prisma/likes-prisma-repository";
+import { PrismaLikesRepository } from '@/repositories/prisma/likes-prisma-repository'
+import { GetLikeUseCase } from '@/use-cases/likes/get-like'
 
-export function makeGetLikeUseCase(){
-    const likesRepository = new PrismaLikesRepository()
-    const getLikeUseCase = new GetLikeUseCase(likesRepository)
+export function makeGetLikeUseCase() {
+  const likesRepository = new PrismaLikesRepository()
+  const getLikeUseCase = new GetLikeUseCase(likesRepository)
 
-    return getLikeUseCase
+  return getLikeUseCase
 }

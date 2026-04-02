@@ -1,24 +1,28 @@
-import type { PostWithRelations, PostsRepository } from "@/repositories/posts-repository";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
+import type {
+  PostsRepository,
+  PostWithRelations,
+} from '@/repositories/posts-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface ListPostByUserUseCaseRequest {
-    usuarioId: string
+  usuarioId: string
 }
 
 type ListPostByUserUseCaseResponse = {
-    posts: PostWithRelations[]
+  posts: PostWithRelations[]
 }
 
 export class ListPostByUserUseCase {
-    constructor (private postsRepository: PostsRepository){}
-    
-    async execute ({usuarioId}: ListPostByUserUseCaseRequest): Promise<ListPostByUserUseCaseResponse>{
-        
-        const posts = await this.postsRepository.findPostsByUser(usuarioId)
+  constructor(private postsRepository: PostsRepository) {}
 
-        if (posts.length === 0){
-            throw new ResourceNotFoundError()
-        }
-        return {posts}
+  async execute({
+    usuarioId,
+  }: ListPostByUserUseCaseRequest): Promise<ListPostByUserUseCaseResponse> {
+    const posts = await this.postsRepository.findPostsByUser(usuarioId)
+
+    if (posts.length === 0) {
+      throw new ResourceNotFoundError()
     }
+    return { posts }
+  }
 }

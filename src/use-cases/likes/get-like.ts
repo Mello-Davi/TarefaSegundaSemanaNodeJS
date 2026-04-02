@@ -1,27 +1,28 @@
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { LikeWithRelations, LikesRepository } from "@/repositories/likes-repository";
+import type {
+  LikesRepository,
+  LikeWithRelations,
+} from '@/repositories/likes-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface GetLikeUseCaseRequest {
-    publicId: string
+  publicId: string
 }
 
 type GetLikeUseCaseResponse = {
-    like: LikeWithRelations
+  like: LikeWithRelations
 }
 
 export class GetLikeUseCase {
-    constructor (private likesRepository: LikesRepository){}
-    
-    async execute ({
-        publicId
+  constructor(private likesRepository: LikesRepository) {}
 
-    }: GetLikeUseCaseRequest): Promise<GetLikeUseCaseResponse>{
-        
-        const like = await this.likesRepository.findBy({publicId})
+  async execute({
+    publicId,
+  }: GetLikeUseCaseRequest): Promise<GetLikeUseCaseResponse> {
+    const like = await this.likesRepository.findBy({ publicId })
 
-        if (!like){
-            throw new ResourceNotFoundError()
-        }
-        return {like}
+    if (!like) {
+      throw new ResourceNotFoundError()
     }
+    return { like }
+  }
 }

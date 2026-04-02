@@ -1,24 +1,29 @@
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
-import type { ComentarioWithRelations, ComentariosRepository } from "@/repositories/comments-repository";
+import type {
+  ComentariosRepository,
+  ComentarioWithRelations,
+} from '@/repositories/comments-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface ListComentariosByUserUseCaseRequest {
-    usuarioId: string
+  usuarioId: string
 }
 
 type ListComentariosByUserUseCaseResponse = {
-    comentarios: ComentarioWithRelations[]
+  comentarios: ComentarioWithRelations[]
 }
 
 export class ListComentariosByUserUseCase {
-    constructor (private comentariosRepository: ComentariosRepository){}
-    
-    async execute ({usuarioId}: ListComentariosByUserUseCaseRequest): Promise<ListComentariosByUserUseCaseResponse>{
-        
-        const comentarios = await this.comentariosRepository.findComentariosByUser(usuarioId)
+  constructor(private comentariosRepository: ComentariosRepository) {}
 
-        if (comentarios.length === 0){
-            throw new ResourceNotFoundError()
-        }
-        return {comentarios}
+  async execute({
+    usuarioId,
+  }: ListComentariosByUserUseCaseRequest): Promise<ListComentariosByUserUseCaseResponse> {
+    const comentarios =
+      await this.comentariosRepository.findComentariosByUser(usuarioId)
+
+    if (comentarios.length === 0) {
+      throw new ResourceNotFoundError()
     }
+    return { comentarios }
+  }
 }

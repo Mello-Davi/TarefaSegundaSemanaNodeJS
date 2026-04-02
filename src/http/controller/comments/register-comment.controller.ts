@@ -1,31 +1,26 @@
-import z from "zod"
-import type { FastifyReply, FastifyRequest } from "fastify"
-import { makeRegisterCommentUseCase } from "@/use-cases/factories/comment/make-register-comment-use-case"
-import { ComentarioPresenter } from "../../presenters/comment-presenter"
+import type { FastifyReply, FastifyRequest } from 'fastify'
+import z from 'zod'
+import { makeRegisterCommentUseCase } from '@/use-cases/factories/comment/make-register-comment-use-case'
+import { ComentarioPresenter } from '../../presenters/comment-presenter'
 
+export async function registerComment(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
+  const registerCommentBodySchema = z.object({
+    conteudo: z.string().min(1).max(1000),
+    postId: z.string(),
+  })
 
-export async function registerComment (request: FastifyRequest, reply: FastifyReply) {
-    try {
-        const registerCommentBodySchema = z.object({
-            conteudo: z.string().min(1).max(1000),
-            postId: z.string()
-        })
-    
-        const {conteudo, postId} = registerCommentBodySchema.parse(request.body)
-        const { sub } = request.user
-   
-        const registerCommentUseCase = makeRegisterCommentUseCase()
-        const { comment } = await registerCommentUseCase.execute({
-            conteudo,
-            usuarioId: sub,
-            postId
-        })
-    
-        return reply.status(201).send(ComentarioPresenter.toHTTP(comment))
-    } catch (error){
+  const { conteudo, postId } = registerCommentBodySchema.parse(request.body)
+  const { sub } = request.user
 
-        throw error
-    }
+  const registerCommentUseCase = makeRegisterCommentUseCase()
+  const { comment } = await registerCommentUseCase.execute({
+    conteudo,
+    usuarioId: sub,
+    postId,
+  })
 
-
+  return reply.status(201).send(ComentarioPresenter.toHTTP(comment))
 }

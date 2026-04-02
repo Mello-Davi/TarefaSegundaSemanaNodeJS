@@ -1,12 +1,12 @@
-import type { Prisma } from "@/@types/prisma/client"
+import type { Prisma } from '@/@types/prisma/client'
 
 type LikeWithRelations = Prisma.LikeGetPayload<{
-    include: {
-      usuario: true
-      post: true
-      comentario: true
-    }
-  }>
+  include: {
+    usuario: true
+    post: true
+    comentario: true
+  }
+}>
 
 type HTTPLike = {
   id: string
@@ -19,9 +19,11 @@ type HTTPLike = {
 export class LikePresenter {
   static toHTTP(like: LikeWithRelations): HTTPLike
   static toHTTP(likes: LikeWithRelations[]): HTTPLike[]
-  static toHTTP(input: LikeWithRelations | LikeWithRelations[]): HTTPLike | HTTPLike[] {
+  static toHTTP(
+    input: LikeWithRelations | LikeWithRelations[],
+  ): HTTPLike | HTTPLike[] {
     if (Array.isArray(input)) {
-      return input.map((like) => this.toHTTP(like))
+      return input.map((like) => LikePresenter.toHTTP(like))
     }
 
     return {

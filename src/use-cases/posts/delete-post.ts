@@ -1,24 +1,20 @@
-
-import type { PostsRepository } from "@/repositories/posts-repository";
-import { ResourceNotFoundError } from "../errors/resource-not-found-error";
+import type { PostsRepository } from '@/repositories/posts-repository'
+import { ResourceNotFoundError } from '../errors/resource-not-found-error'
 
 interface DeletePostUseCaseRequest {
-    publicId: string
+  publicId: string
 }
 
 export class DeletePostUseCase {
-    constructor (private postsRepository: PostsRepository){}
-    
-    async execute ({
-        publicId
-    }: DeletePostUseCaseRequest){
-        
-        const postToDelete = await this.postsRepository.findBy({publicId})
- 
-        if (!postToDelete){
-            throw new ResourceNotFoundError()
-        }
+  constructor(private postsRepository: PostsRepository) {}
 
-        await this.postsRepository.delete(postToDelete.id)
+  async execute({ publicId }: DeletePostUseCaseRequest) {
+    const postToDelete = await this.postsRepository.findBy({ publicId })
+
+    if (!postToDelete) {
+      throw new ResourceNotFoundError()
     }
+
+    await this.postsRepository.delete(postToDelete.id)
+  }
 }

@@ -1,11 +1,10 @@
-import { PrismaPostsRepository } from "@/repositories/prisma/posts-prisma-repository"
-import { ListPostByUserUseCase } from "@/use-cases/posts/list-posts-by-user"
+import { PrismaPostsRepository } from '@/repositories/prisma/posts-prisma-repository'
+import { ListPostByUserUseCase } from '@/use-cases/posts/list-posts-by-user'
 
+export function makeListPostByUserUseCase() {
+  const postsRepository = new PrismaPostsRepository()
 
-export function makeListPostByUserUseCase(){
-    const postsRepository = new PrismaPostsRepository()
-    
-    const listPostByUserUseCase = new ListPostByUserUseCase(postsRepository)
+  const listPostByUserUseCase = new ListPostByUserUseCase(postsRepository)
 
-    return listPostByUserUseCase
+  return listPostByUserUseCase
 }
