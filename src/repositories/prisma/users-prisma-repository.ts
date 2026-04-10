@@ -11,8 +11,10 @@ export class PrismaUsuariosReporistory implements UsuariosRepository {
       where: { email },
     })
   }
-  async findBy(where: Prisma.UsuarioWhereInput) {
-    return await prisma.usuario.findFirst({ where })
+  async findBy(where: Prisma.UsuarioWhereUniqueInput) {
+    return await prisma.usuario.findUnique({
+      where,
+    })
   }
 
   async list() {

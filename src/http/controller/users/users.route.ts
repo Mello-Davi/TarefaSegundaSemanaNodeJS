@@ -6,14 +6,18 @@ import { listLikesByUser } from '../likes/list-likes-by-user.controller.js'
 import { listPostsByUser } from '../posts/list-posts-by-user.controller.js'
 import { authenticate } from './authenticate.controller.js'
 import { deleteUser } from './delete-user.controller.js'
+import { forgotPassword } from './forgot-password.controller.js'
 import { get, getProfile } from './get-user.controller.js'
 import { list } from './list.controller.js'
 import { register } from './register.controller.js'
+import { resetPassword } from './reset-password.controller.js'
 import { update, updateProfile } from './update-user.controller.js'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post('/', register)
   app.post('/authenticate', authenticate)
+  app.post('/forgot-password', forgotPassword)
+  app.patch('/reset-password', resetPassword)
 
   app.get('/:publicId', get)
   app.get('/', list)

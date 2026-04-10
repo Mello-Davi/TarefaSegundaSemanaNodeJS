@@ -20,6 +20,9 @@ model Usuario {
   passwordHash  String  @map("password_hash")
   role          USER_ROLE @default(DEFAULT)
 
+  token          String?    @unique
+  tokenExpiresAt DateTime?  @map("token_expires_at")
+
   foto          String? 
   posts         Post[]
   comentarios   Comentario[]
@@ -27,6 +30,7 @@ model Usuario {
   created_at    DateTime @default(now()) @map("created_at")
   uploaded_at   DateTime @updatedAt @map("uploaded_at")
 
+  @@index([token], name: "idx_user_token")
   @@map("usuarios")
 }
 
