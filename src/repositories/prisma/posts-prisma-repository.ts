@@ -37,4 +37,29 @@ export class PrismaPostsRepository implements PostsRepository {
       },
     })
   }
+  async findAllUsers() {
+    return prisma.usuario.findMany({
+      select: {
+        email: true,
+      },
+    })
+  }
+  async findManyRecent(date: Date) {
+    const posts = await prisma.post.findMany({
+      where: {
+        created_at: {
+          gte: date,
+        },
+      },
+      include: {
+        likes: true,
+      },
+    })
+
+    return posts.map((post) => ({
+      title: post.titulo,
+      likes: post.likes.length,
+      created_at: post.created_at,
+    }))
+  }
 }
