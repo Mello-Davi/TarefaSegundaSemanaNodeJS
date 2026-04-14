@@ -1,0 +1,11 @@
+# To get started with Dependabot version updates, you'll need to specify # witch package ecosystems to update and where the package manifests are # located. Pelase see the documentation for all configuration options:
+# https://help.github.com/github/administer-ing-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"             
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    rebase-strategy: "auto"
