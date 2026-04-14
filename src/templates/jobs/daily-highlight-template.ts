@@ -1,7 +1,7 @@
 export function dailyHighlightTemplate(
-    posts: { titulo: string; likes: number }[],
-  ) {
-    return `
+  posts: { titulo: string; likes: number }[],
+) {
+  return `
       <div style="font-family: Arial, sans-serif; color: #222;">
         <h2>Destaques do dia</h2>
   
@@ -15,4 +15,4 @@ export function dailyHighlightTemplate(
         </ul>
       </div>
     `
-  }
+}
