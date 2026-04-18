@@ -1,9 +1,10 @@
 import { PrismaUsuariosReporistory } from '@/repositories/prisma/users-prisma-repository'
 import { ListUserUseCase } from '../../users/list-users'
+import { RedisProvider } from '@/providers/redis-provider'
 
 export function makeListUseCase() {
   const usuariosRepository = new PrismaUsuariosReporistory()
-  const listUserUseCase = new ListUserUseCase(usuariosRepository)
+  const cacheProvider = new RedisProvider()
 
-  return listUserUseCase
+  return new ListUserUseCase(usuariosRepository, cacheProvider)
 }
