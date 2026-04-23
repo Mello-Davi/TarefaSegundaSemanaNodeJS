@@ -86,7 +86,7 @@ cp .env.example .env
 ### 🔹 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/Mello-Davi/TarefaPrimeiraSemanaNodeJS.git
+git clone https://github.com/Mello-Davi/social-media-api.git
 cd TarefaPrimeiraSemanaNodeJS
 ```
 
