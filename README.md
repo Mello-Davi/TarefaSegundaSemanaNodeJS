@@ -87,7 +87,7 @@ cp .env.example .env
 
 ```bash
 git clone https://github.com/Mello-Davi/social-media-api.git
-cd TarefaPrimeiraSemanaNodeJS
+cd social-mdeia-api
 ```
 
 ---
