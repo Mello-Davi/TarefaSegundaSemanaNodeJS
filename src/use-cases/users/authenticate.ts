@@ -7,13 +7,24 @@ interface AuthenticateUsuarioUseCaseRequest {
   email: string
   password: string
 }
+interface HashProvider {
+  compare(password: string, hash: string): Promise<boolean>
+}
+
+interface TokenProvider {
+  sign(payload: any): string
+}
 
 type AuthenticateUsuarioUseCaseResponse = {
-  user: Usuario
+  user: Usuario,
+  token: string
 }
 
 export class AuthenticateUsuarioUseCase {
-  constructor(private usuariosRepository: UsuariosRepository) {}
+  constructor(private usuariosRepository: UsuariosRepository,
+    private hashProvider: HashProvider,
+    private tokenProvider: TokenProvider
+  ) {}
 
   async execute({
     email,
@@ -25,11 +36,16 @@ export class AuthenticateUsuarioUseCase {
       throw new InvalidCredentialsError()
     }
 
-    const doesPasswordMatches = await compare(password, user.passwordHash)
+    const doesPasswordMatches = await this.hashProvider.compare(password, user.passwordHash)
 
     if (!doesPasswordMatches) {
       throw new InvalidCredentialsError()
     }
-    return { user }
+
+    const token = this.tokenProvider.sign({
+      sub: user.id
+    })
+
+    return { user, token }
   }
 }
